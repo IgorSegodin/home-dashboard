@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--    <link data-th-href="@{/css/bootstrap.min.css}" rel="stylesheet">-->
-<!--    <link data-th-href="@{/css/main.css}" rel="stylesheet">-->
+    <title>Home</title>
 </head>
 <body>
 
@@ -13,29 +12,18 @@
 
     <div class="row">
         <div id="title">
-            <h1>Spring WebFlux + Thymeleaf</h1>
+            <h1>Home</h1>
         </div>
         <ul>
             <li data-th-each="sensor : ${sensors}">
                 <div>[[${sensor.name}]] - [[${sensor.description}]]</div>
+                <ul>
+                    <li data-th-each="field : ${sensor.values}">
+                        [[${field.key}]]: [[${field.value}]]
+                    </li>
+                </ul>
             </li>
         </ul>
-        <div>
-            End
-        </div>
-<!--        <table id="allMovies" class="table table-striped">-->
-<!--            <thead>-->
-<!--            <tr>-->
-<!--                <th width="70%">Name</th>-->
-<!--                <th>Score</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--            <tbody>-->
-<!--            <tr class="result" data-th-each="movie : ${movies}">-->
-<!--                <td>[[${movie}]]</td>-->
-<!--            </tr>-->
-<!--            </tbody>-->
-<!--        </table>-->
     </div>
 
 </div>

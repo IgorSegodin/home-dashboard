@@ -7,6 +7,7 @@ import org.springframework.cloud.client.loadbalancer.reactive.ReactiveLoadBalanc
 import org.springframework.cloud.client.loadbalancer.reactive.ReactorLoadBalancerExchangeFilterFunction;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -43,7 +44,12 @@ public class BackendApiConfig {
 
             @Override
             public Mono<Map<String, Object>> getSensorValues(String name) {
-                return null;
+                return webClient.get()
+                        .uri(protocol + "://" + serviceUrl + "/sensor/value/{name}", name)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .retrieve()
+                        .bodyToMono(new ParameterizedTypeReference<>() {
+                        });
             }
         };
 
